@@ -18,9 +18,6 @@ return new class extends Migration
             $table->boolean("isAdmin")->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('confirm_password');
-            $table->integer('cId');
-            $table->integer("uId");
             $table->boolean("isDeleted")->default(0);
             $table->rememberToken();
             $table->timestamps();

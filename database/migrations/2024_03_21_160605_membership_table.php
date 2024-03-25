@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->String("membershipLevel")->unique();
             $table->integer("numberOfBooks");
+            $table->integer("price");
             $table->integer("cId")->nullable();
             $table->integer("uId")->nullable();
             $table->boolean("idDeleted")->default(0);
