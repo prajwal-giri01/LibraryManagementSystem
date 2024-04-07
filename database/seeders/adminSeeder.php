@@ -20,8 +20,9 @@ class adminSeeder extends Seeder
             'isAdmin' => 1,
             'email'=>'admin@gmail.com',
             'password'=>Hash::make('password'),
-            "created_at" => Carbon::now(),
-            "updated_at" => Carbon::now(),
+            'email_verified_at' => now(),
+            "created_at" =>now(),
+            "updated_at" => now(),
         ]);
 
     }
