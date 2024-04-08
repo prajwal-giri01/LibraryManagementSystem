@@ -4,7 +4,7 @@
         <nav class="navbar navbar-light  d-flex justify-between ">
 
             <a class="navbar-brand" href="#">
-                <img src={{asset("storage/Images/herald-white-logo.svg")}} width="30" height="30"
+                <img src={{asset("images/herald-white-logo.svg")}} width="30" height="30"
                      class="d-inline-block align-top logo"
                      alt="">
             </a>
@@ -58,13 +58,13 @@
             </div>
             <div class="hero_view col-10 px-2">
                 <div class="big_slider">
-                    <img src="{{asset("storage/Images/rect.png")}}">
+                    <img src="{{asset("images/rect.png")}}">
                 </div>
                 <div class="small_slider">
                     <h3 class="medium_title">Most Popular Books</h3>
                     <div class="d-flex justify-between small_slider">
                         <div>
-                            <img src="{{asset("storage/Images/harrypoter1.png")}}">
+                            <img src="{{asset("images/harrypoter1.png")}}">
                             <div class="book_details d-flex justify-between">
                                 <div class="details">
                                     <h4>book Name</h4>
@@ -77,7 +77,7 @@
                         </div>
 
                         <div>
-                            <img src="{{asset("storage/Images/harrypoter2.png")}}">
+                            <img src="{{asset("images/harrypoter2.png")}}">
                             <div class="book_details d-flex justify-between">
                                 <div class="details">
                                     <h4>book Name</h4>
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div>
-                            <img src="{{asset("storage/Images/harrypoter3.png")}}">
+                            <img src="{{asset("images/harrypoter3.png")}}">
                             <div class="book_details d-flex justify-between">
                                 <div class="details">
                                     <h4>book Name</h4>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div>
-                            <img src="{{asset("storage/Images/harrypoter4.png")}}">
+                            <img src="{{asset("images/harrypoter4.png")}}">
                             <div class="book_details d-flex justify-between">
                                 <div class="details">
                                     <h4>book Name</h4>
