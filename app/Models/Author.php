@@ -14,4 +14,9 @@ class Author extends Model
       'uId'
     ];
     protected $table='author';
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

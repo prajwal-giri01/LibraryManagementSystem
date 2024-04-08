@@ -43,8 +43,6 @@
         </nav>
 
     </header>
-
-
     <section class="container font-sans antialiased px-2 my-3">
         <div class="d-flex ">
             <div class="side_bar col-2 ">
@@ -52,22 +50,10 @@
                     Genre
                 </h2>
                 <ul class="rightAl_list">
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">Fantasy</a></li>
-                    <li><a href="#">See More...</a></li>
+                    @foreach($genres->take(15) as $genre)
+                    <li><a href="#">{{$genre->name}}</a></li>
+                    @endforeach
+                     <li><a href="#">See More...</a></li>
                 </ul>
             </div>
             <div class="hero_view col-10 px-2">

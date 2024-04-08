@@ -20,7 +20,7 @@
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
-@if(auth()->user()->isAdmin !=1)
+            @if(auth()->user()->isAdmin !=1)
             <div class="p-4 sm:p-8 bg dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')

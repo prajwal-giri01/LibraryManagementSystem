@@ -1,9 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 .logo {
     width: 10.875rem;
 }
 
 .bg-main {
-    background-color: #75C043 !important;
+    background-color: #75c043 !important;
 }
 
 .navbar {
@@ -24,24 +26,52 @@
     width: 70px !important;
 }
 
-[type=text]:focus, input:where(:not([type])):focus, [type=email]:focus, [type=url]:focus, [type=password]:focus, [type=number]:focus, [type=date]:focus, [type=datetime-local]:focus, [type=month]:focus, [type=search]:focus, [type=tel]:focus, [type=time]:focus, [type=week]:focus, [multiple]:focus, textarea:focus, select:focus {
+[type="text"]:focus,
+input:where(:not([type])):focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
     outline: 0 !important;
     outline-offset: 0 !important;
     border-color: rgba(37, 99, 235, 0) !important;
     box-shadow: 0 0 0 rgba(255, 0, 0, 0) !important;
     border-width: 0 !important;
-
 }
 
-[type=text], input:where(:not([type])), [type=email], [type=url], [type=password], [type=number], [type=date], [type=datetime-local], [type=month], [type=search], [type=tel], [type=time], [type=week], [multiple], textarea, select {
+[type="text"],
+input:where(:not([type])),
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select {
     border-width: 0 !important;
-
 }
 
 .search {
     border-radius: 50px 0 0 50px;
     border-right: none;
-    width: 100%
+    width: 100%;
 }
 
 /*--------------------------landingpage--------------------------------------*/
@@ -50,11 +80,11 @@
     border-radius: 5px;
     padding: 5px;
     height: inherit;
-
 }
 
 .hero_view {
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
     border-radius: 5px;
     padding: 5px;
 }
@@ -76,16 +106,18 @@
     position: relative;
     font-weight: bold;
 }
-.rightAl_list li::after{
+.rightAl_list li::after {
     content: "";
     position: absolute;
     bottom: 0;
     width: 84%;
     height: 2.5px;
-    background-color: #75C043;
+    background-color: #75c043;
     right: 0;
 }
-
+.rightAl_list li:hover{
+    background-color: #ece3e3;
+}
 .medium_title {
     font-size: 2rem;
     line-height: 1.5;
@@ -105,7 +137,7 @@
     height: 100%;
     max-height: 65px;
     padding: 0 7px;
-    background-color: #3C3C3C;
+    background-color: #3c3c3c;
     color: white;
     align-items: center;
 }
@@ -124,7 +156,7 @@
 
 .small_btn {
     padding: 7px 22px;
-    background-color: #75C043;
+    background-color: #75c043;
     color: #ffffff;
     font-size: 0.8rem;
     border-radius: 35px;
@@ -162,7 +194,6 @@ p {
     padding: 0;
 }
 
-
 .ad_sidebar {
     background-color: #3c3c3c;
     padding: 5px 10px;
@@ -170,25 +201,23 @@ p {
     height: 100svh;
     margin-top: 1px;
 }
- .ad_menu li a {
+.ad_menu li a {
     font-size: 1.1rem;
     padding: 0.7rem 0 0.7rem 23px;
     margin: 5px 0;
     text-align: left;
     border-radius: 4px;
     font-weight: 900;
-
 }
-.ad_menu li{
+.ad_menu li {
     border-bottom: 2px solid;
 }
-.ad_menu li a:hover  {
+.ad_menu li a:hover {
     background-color: rgb(255, 255, 255, 0.1);
 }
-.active{
+.active {
     background-color: rgb(255, 255, 255, 0.1);
     border-radius: 4px;
-
 }
 
 .ad_menu li a i {
@@ -205,7 +234,7 @@ p {
     color: #fff;
     padding: 10px 10px;
     border-radius: 4px;
-    margin: 7px
+    margin: 7px;
 }
 .detail_top h2 {
     font-size: 22px;
@@ -250,9 +279,9 @@ p {
 .event_container table {
     width: 100%;
 }
-.event_container table tbody ,
+.event_container table tbody,
 .event_container table thead th {
- padding: 8px;
+    padding: 8px;
 }
 .event_container table tbody tr td:first-child,
 .event_container table thead th:first-child {
@@ -279,7 +308,7 @@ p {
     left: 0; /* Adjust to 50% of the total width */
     width: 40%; /* 50% of the total width */
     height: 3px; /* Height of the underline */
-    background-color: #75C043; /* Color of the underline */
+    background-color: #75c043; /* Color of the underline */
 }
 .action_button {
     width: 100%;
@@ -289,7 +318,7 @@ p {
     color: white;
 }
 
-.action_button a{
+.action_button a {
     background-color: #007bff;
     padding: 10px 15px;
     display: inline-block;
@@ -314,7 +343,6 @@ p {
     color: #fff;
     margin: 0 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adding transition for smooth animation */
-
 }
 
 .action_button_delete:hover {
@@ -355,6 +383,58 @@ p {
     transform: translateY(-3px); /* Move the button 3px up on hover */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
 }
-.primary_button:hover{
+.primary_button:hover {
     background-color: #53852e !important;
 }
+
+/* author form  */
+
+.login-page {
+    padding: 6% 0 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+.author_from {
+    position: relative;
+    z-index: 1;
+    background: #3c3c3c;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 60px 0 rgb(106 28 255 / 20%),
+    0 4px 20px 0 rgb(14 149 255 / 24%);
+    border-radius: 5px;
+}
+.author_from label {
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.author_from button {
+    text-transform: uppercase;
+    background: #4caf50;
+    width: fit-content;
+    border: 0;
+    font-weight: 600;
+    padding: 13px 45px;
+    color: #ffffff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 35px;
+    margin-top: 15px;
+}
+.author_from button:hover,
+.author_from button:active,
+.author_from button:focus {
+    background: #43a047;
+}
+
+/* author form  */

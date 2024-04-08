@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer("quantity");
             $table->integer("cId")->nullable();
             $table->integer("uId")->nullable();
-            $table->boolean("idDeleted")->default(0);
+            $table->boolean("isDeleted")->default(0);
             $table->timestamps();
             $table->string("extra")->nullable();
 

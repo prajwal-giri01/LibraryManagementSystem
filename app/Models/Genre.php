@@ -14,4 +14,9 @@ class Genre extends Model
         'uId'
     ];
     protected $table='genre';
+
+    public function books()
+    {
+        return $this->hasMany(Book::class, 'genre');
+    }
 }
