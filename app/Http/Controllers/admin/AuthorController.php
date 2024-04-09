@@ -55,7 +55,7 @@ class AuthorController extends Controller
     {
 
         $request->validate([
-            'name' => [' required', 'string', 'unique:author']
+            'name' => ['required', 'string', 'unique:author']
         ]);
         Author::create([
             'name' => $request->name,
@@ -74,8 +74,12 @@ class AuthorController extends Controller
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'unique:author']
+        ]);
         Author::where('id', $id)->update([
             'name' => $request->name,
+            'uId' => auth()->user()->id,
         ]);
         return redirect()->route('admin.author')->with("message", "Author Edited Successfully");
     }

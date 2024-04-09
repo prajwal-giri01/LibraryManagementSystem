@@ -7,7 +7,7 @@
             </div>
             <div class="cta_container col-2">
                 <a href={{route("admin.book.trash.index")}}><i class="fa-solid fa-trash"></i></a>
-                <a href="#"><i class="fa-solid fa-plus"></i></a>
+                <a href={{route("admin.book.add")}}><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
         <div class="event_container">

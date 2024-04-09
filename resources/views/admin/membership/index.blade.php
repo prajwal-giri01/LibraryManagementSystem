@@ -7,7 +7,7 @@
             </div>
             <div class="cta_container col-2">
                 <a href={{route("admin.membership.trash.index")}}><i class="fa-solid fa-trash"></i></a>
-                <a href="#"><i class="fa-solid fa-plus"></i></a>
+                <a href={{route("admin.membership.add")}}><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
         <div class="event_container">
@@ -35,8 +35,8 @@
                             <td>{{ $membership->price}}</td>
                             <td>
                                 <div class="action_button_main">
-                                    <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{{ route('admin.membership.trash', ['id' => $membership->id]) }}"><i class="fa-solid fa-xmark"></i></a>
+                                    <a href="{{ route('admin.membership.edit', ['id' => $membership->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="{{ route('admin.membership.trash',['id' => $membership->id]) }}"><i class="fa-solid fa-xmark"></i></a>
                                 </div>
                             </td>
                         </tr>

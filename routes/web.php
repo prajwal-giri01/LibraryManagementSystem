@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
 
     //Book
     Route::get('book',[BookController::class, 'index'])->name('admin.book');
+    Route::get('book/add',[BookController::class, 'show'])->name('admin.book.add');
+    Route::post('book/store',[BookController::class, 'store'])->name('admin.book.store');
     Route::get('book/{id}',[BookController::class, 'trash'])->name('admin.book.trash');
     Route::get('trash/book',[BookController::class, 'trashshow'])->name('admin.book.trash.index');
     Route::get('restore/book/{id}' ,[BookController::class,'restore' ])->name('admin.book.restore');
@@ -50,6 +52,10 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
 
     //Membership
     Route::get('membership',[MembershipController::class, 'index'])->name('admin.membership');
+    Route::get('membership/add',[MembershipController::class, 'show'])->name('admin.membership.add');
+    Route::post('membership/store',[MembershipController::class, 'store'])-> name('admin.membership.store');
+    Route::get('membership/edit/{id}',[MembershipController::class, 'edit'])-> name('admin.membership.edit');
+    Route::put('membership/update/{id}',[MembershipController::class, 'update'])-> name('admin.membership.update');
     Route::get('membership/{id}',[MembershipController::class, 'trash'])->name('admin.membership.trash');
     Route::get('trash/membership',[MembershipController::class, 'trashshow'])->name('admin.membership.trash.index');
     Route::get('restore/membership/{id}' ,[MembershipController::class,'restore' ])->name('admin.membership.restore');

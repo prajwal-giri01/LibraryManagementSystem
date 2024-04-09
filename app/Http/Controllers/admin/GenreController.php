@@ -56,8 +56,12 @@ public function show()
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name'=>[' required', 'string','unique:author']
+        ]);
         Genre::where('id', $id)->update([
             'name' => $request->name,
+            'uId'=>auth()->user()->id,
         ]);
         return redirect()->route('admin.genre')->with("message", "Genre Edited Successfully");
     }

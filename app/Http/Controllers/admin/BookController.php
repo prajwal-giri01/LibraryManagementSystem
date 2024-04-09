@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Genre;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -29,7 +32,23 @@ class BookController extends Controller
         ]);
         return redirect()->back();
     }
+    public function show(){
+        $authors = Author::where('isDeleted',0)->get();
+        $genres = Genre::where('isDeleted',0)->get();
+        return view('admin.book.add',compact('authors','genres'));
+    }
 
+    public function store(Request $request){
+
+        $request->validate([
+           'title' => [' required', 'string', 'unique:book'],
+            'author' => [ 'required', 'string', 'exists:author,name'] ,
+            'genre' => [ 'required', 'string', 'exists:genre,name'],
+            'quantity' => [ 'required', 'integer']
+        ]);
+
+
+    }
     public function destroy($id) {
         Book::destroy($id);
         return redirect()->back();
