@@ -33,7 +33,7 @@
                                 <td>{{ $author->name }}</td>
                                 <td>
                                     <div class="action_button_main">
-                                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href={{route('admin.author.edit', ['id' => $author->id])}}><i class="fa-solid fa-pen-to-square"></i></a>
                                         <a href="{{ route('admin.author.trash', ['id' => $author->id]) }}" ><i class="fa-solid fa-xmark"></i></a>
 
                                     </div>

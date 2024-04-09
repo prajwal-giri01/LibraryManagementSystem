@@ -3,7 +3,7 @@
         <!-- Image and text -->
         <nav class="navbar navbar-light  d-flex justify-between ">
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src={{asset("images/herald-white-logo.svg")}} width="30" height="30"
                      class="d-inline-block align-top logo"
                      alt="">
@@ -20,7 +20,8 @@
                 @if (Route::has('login'))
 
                     @auth
-                        <a href="{{ url('/dashboard') }}"
+                        <a href="{{ auth()->user()->isAdmin == 0? url('/dashboard'): url('admin/dashboard') }}"
+
                            class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                         >
                             Dashboard
@@ -58,7 +59,7 @@
             </div>
             <div class="hero_view col-10 px-2">
                 <div class="big_slider">
-                    <img src="{{asset("images/rect.png")}}">
+                    <img src="{{asset("images/books.jpg")}}">
                 </div>
                 <div class="small_slider">
                     <h3 class="medium_title">Most Popular Books</h3>

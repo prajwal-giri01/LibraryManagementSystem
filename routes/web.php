@@ -20,8 +20,11 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin'],function(){
     Route::get('dashboard',[AuthorController::class, 'showDashboard'])->name('admin.dashboard');
     // Author
-    Route::get('author/add',[AuthorController::class, 'show'])->name('admin.author.add');
     Route::get('author',[AuthorController::class, 'index'])->name('admin.author');
+    Route::get('author/add',[AuthorController::class, 'show'])->name('admin.author.add');
+    Route::post('author/store',[AuthorController::class, 'store'])->name('admin.author.store');
+    Route::get('author/edit/{id}',[AuthorController::class, 'edit'])->name('admin.author.edit');
+    Route::PUT('author/update/{id}',[AuthorController::class, 'update'])->name('admin.author.update');
     Route::get('author/{id}',[AuthorController::class, 'trash'])->name('admin.author.trash');
     Route::get('trash/author',[AuthorController::class, 'trashshow'])->name('admin.author.trash.index');
     Route::get('restore/author/{id}',[AuthorController::class,'restore'])->name('admin.author.restore');
@@ -29,6 +32,10 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
 
     //Genre
     Route::get('genre',[GenreController::class, 'index'])->name('admin.genre');
+    Route::get('genre/add',[GenreController::class, 'show'])->name('admin.genre.add');
+    Route::post('genre/store',[GenreController::class, 'store'])->name('admin.genre.store');
+    Route::get('genre/edit/{id}',[GenreController::class, 'edit'])->name('admin.genre.edit');
+    Route::PUT('genre/update/{id}',[GenreController::class, 'update'])->name('admin.genre.update');
     Route::get('genre/{id}',[GenreController::class, 'trash'])->name('admin.genre.trash');
     Route::get('trash/genre',[GenreController::class, 'trashshow'])->name('admin.genre.trash.index');
     Route::get('restore/genre/{id}' ,[GenreController::class,'restore' ])->name('admin.genre.restore');

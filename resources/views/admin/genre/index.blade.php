@@ -7,7 +7,7 @@
             </div>
             <div class="cta_container col-2">
                 <a href={{route("admin.genre.trash.index")}}><i class="fa-solid fa-trash"></i></a>
-                <a href="#"><i class="fa-solid fa-plus"></i></a>
+                <a href={{route("admin.genre.add")}}><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
             <div class="event_container">
@@ -31,7 +31,7 @@
                                 <td>{{ $genre->name }}</td>
                                 <td>
                                     <div class="action_button_main">
-                                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="{{ route('admin.genre.edit', ['id' => $genre->id]) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <a href="{{ route('admin.genre.trash', ['id' => $genre->id]) }}"><i class="fa-solid fa-xmark"></i></a>
                                     </div>
                                 </td>

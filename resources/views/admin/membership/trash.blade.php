@@ -2,7 +2,7 @@
 @section("main-content")
     <div class="ad_displayDetails col-10">
         <div class="d-flex">
-            <div class="detail_top col-10">
+            <div class="detail_top col-12">
                 <h2>Membership</h2>
             </div>
 
