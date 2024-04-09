@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'landing'])->name('landing');
-
+Route::get('genre/{id}', [HomeController::class, 'genre'])->name('genre');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

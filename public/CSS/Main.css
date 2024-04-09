@@ -451,3 +451,33 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+.book-card {
+    width: 250px; /* Adjust the width according to your design */
+    height: auto;
+    margin-bottom: 20px; /* Adjust as needed */
+    border: 1px solid #ccc; /* Add border for better visual separation */
+}
+
+.book-card img {
+    width: 100%;
+     height: 243px;
+}
+
+.book-details {
+    padding: 10px;
+}
+
+.book-title {
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hide-overflow{
+    display: block;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

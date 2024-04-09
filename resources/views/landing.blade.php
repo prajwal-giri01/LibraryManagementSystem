@@ -52,7 +52,7 @@
                 </h2>
                 <ul class="rightAl_list">
                     @foreach($genres->take(15) as $genre)
-                    <li><a href="#">{{$genre->name}}</a></li>
+                    <li><a href={{route('genre',['id'=>$genre->id])}}>{{$genre->name}}</a></li>
                     @endforeach
                      <li><a href="#">See More...</a></li>
                 </ul>
@@ -64,55 +64,58 @@
                 <div class="small_slider">
                     <h3 class="medium_title">Most Popular Books</h3>
                     <div class="d-flex justify-between small_slider">
-                        <div>
-                            <img src="{{asset("images/harrypoter1.png")}}">
-                            <div class="book_details d-flex justify-between">
-                                <div class="details">
-                                    <h4>book Name</h4>
-                                    <p>Genre</p>
-                                </div>
-                                <div>
-                                    <a class="small_btn" href="#"> button</a>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach($books->take(4) as $book)
 
-                        <div>
-                            <img src="{{asset("images/harrypoter2.png")}}">
-                            <div class="book_details d-flex justify-between">
-                                <div class="details">
-                                    <h4>book Name</h4>
-                                    <p>Genre</p>
-                                </div>
-                                <div>
-                                    <a class="small_btn" href="#"> button</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <img src="{{asset("images/harrypoter3.png")}}">
-                            <div class="book_details d-flex justify-between">
-                                <div class="details">
-                                    <h4>book Name</h4>
-                                    <p>Genre</p>
-                                </div>
-                                <div>
-                                    <a class="small_btn" href="#"> button</a>
+                            <div class="book-card">
+                                <img src="{{ $book->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
+                                <div class="book-details d-flex justify-between bg text-white">
+                                    <div class="details">
+                                        <h4 class="book-title hide_overflow" style="max-width: 138px">{{$book->title}}</h4>
+                                        <p>{{$book->genres->name}}</p>
+                                    </div>
+                                    <div>
+                                        <a class="small_btn" href="#"> button</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <img src="{{asset("images/harrypoter4.png")}}">
-                            <div class="book_details d-flex justify-between">
-                                <div class="details">
-                                    <h4>book Name</h4>
-                                    <p>Genre</p>
-                                </div>
-                                <div>
-                                    <a class="small_btn" href="#"> button</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+
+                        {{--                        <div>--}}
+{{--                            <img src="{{asset("images/harrypoter2.png")}}">--}}
+{{--                            <div class="book_details d-flex justify-between">--}}
+{{--                                <div class="details">--}}
+{{--                                    <h4>book Name</h4>--}}
+{{--                                    <p>Genre</p>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="small_btn" href="#"> button</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <img src="{{asset("images/harrypoter3.png")}}">--}}
+{{--                            <div class="book_details d-flex justify-between">--}}
+{{--                                <div class="details">--}}
+{{--                                    <h4>book Name</h4>--}}
+{{--                                    <p>Genre</p>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="small_btn" href="#"> button</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <img src="{{asset("images/harrypoter4.png")}}">--}}
+{{--                            <div class="book_details d-flex justify-between">--}}
+{{--                                <div class="details">--}}
+{{--                                    <h4>book Name</h4>--}}
+{{--                                    <p>Genre</p>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="small_btn" href="#"> button</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
 
 
