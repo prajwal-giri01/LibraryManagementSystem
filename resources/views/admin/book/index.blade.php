@@ -35,7 +35,7 @@
                             <td>{{ $book->genres->name}}</td>
                             <td>
                                 <div class="action_button_main">
-                                    <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="{{route('admin.book.edit',['id'=>$book->id])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="{{ route('admin.book.trash', ['id' => $book->id]) }}"><i class="fa-solid fa-xmark"></i></a>
                                 </div>
                             </td>

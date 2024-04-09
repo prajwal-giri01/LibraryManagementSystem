@@ -28,4 +28,8 @@ class Book extends Model
         return $this->belongsTo(Genre::class, 'genre');
     }
 
+    public function image(){
+        return $this->hasOne(BookImage::class, 'book_id');
+    }
+
 }

@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
     Route::get('book',[BookController::class, 'index'])->name('admin.book');
     Route::get('book/add',[BookController::class, 'show'])->name('admin.book.add');
     Route::post('book/store',[BookController::class, 'store'])->name('admin.book.store');
+    Route::get('book/edit/{id}',[BookController::class, 'edit'])->name('admin.book.edit');
+    Route::put('book/edit/{id}',[BookController::class, 'update'])->name('admin.book.update');
     Route::get('book/{id}',[BookController::class, 'trash'])->name('admin.book.trash');
     Route::get('trash/book',[BookController::class, 'trashshow'])->name('admin.book.trash.index');
     Route::get('restore/book/{id}' ,[BookController::class,'restore' ])->name('admin.book.restore');

@@ -16,7 +16,8 @@ class membership extends Model
         "uId",
         "isDeleted",
         "created_at",
-        "updated_at"
+        "updated_at",
+        'Extra',
     ];
     protected $table = "membershiptable";
 }

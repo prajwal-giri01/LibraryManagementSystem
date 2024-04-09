@@ -38,12 +38,14 @@ class MembershipController extends Controller
             'membershipLevel' => [' required', 'string', 'unique:membershiptable'],
             'numberOfBooks' => [ 'required', 'integer'] ,
             'price' => [ 'required', 'integer'],
+            'benefit' => ['required', 'string']
         ]);
         membership::create(
             [
                 'membershipLevel' => $request->membershipLevel,
                 'numberOfBooks' => $request->numberOfBooks,
                 'price' => $request->price,
+                'Extra'=>$request->benefit,
                 'cId' => auth()->user()->id,
                 'uId' => auth()->user()->id,
             ]
@@ -60,12 +62,14 @@ class MembershipController extends Controller
             'membershipLevel' => [' required', 'string'],
             'numberOfBooks' => [ 'required', 'integer'] ,
             'price' => [ 'required', 'integer'],
+            'benefit' => ['required', 'string']
         ]);
         membership::where('id',$id)->update(
             [
                 'membershipLevel' => $request->membershipLevel,
                 'numberOfBooks' => $request->numberOfBooks,
                 'price' => $request->price,
+                'Extra'=>$request->benefit,
                 'uId' => auth()->user()->id,
             ]
         );

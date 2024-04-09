@@ -24,6 +24,11 @@
                             <x-text-input id="price"  name="price" type="text" class="mt-1 block w-full" value="{{old('price')}}"  />
                             <x-input-error :messages="$errors->get('price')" class="text-red-600"/>
                         </div>
+                        <div class="col-5" >
+                            <x-input-label for="benefit" :value="__('Benefit')" />
+                            <textarea id="benefit" placeholder="Separate benefits by comma" name="benefit" type="text" class="mt-1 block w-full" >{{old('benefit')}}</textarea>
+                            <x-input-error :messages="$errors->get('benefit')" class="text-red-600"/>
+                        </div>
                     </div>
 
                     <div class="mt-4">
