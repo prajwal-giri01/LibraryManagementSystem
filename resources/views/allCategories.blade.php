@@ -9,11 +9,11 @@
                      alt="">
             </a>
 
-            <form method="Get" action={{route('search')}} class="form-inline d-flex" style="width: 40rem; height: 3rem;">
-            <input class="search mr-sm-2" placeholder="Search...." aria-label="Search" name="search">
-            <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
-                <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
-            </button>
+            <form class="form-inline d-flex" style="width: 40rem; height: 3rem;">
+                <input class=" search mr-sm-2" placeholder="Search...." aria-label="Search">
+                <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
+                </button>
             </form>
 
             <div class="bg-main d-flex flex-wrap align-content-around"
@@ -47,23 +47,29 @@
         </nav>
 
     </header>
-    <div class="container">
-        <div class="d-flex justify-between small_slider">
-            @foreach($books as $book)
-
-            <div class="book-card">
-                <img src="{{ $book->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
-                <div class="book-details d-flex justify-between bg text-white">
-                    <div class="details">
-                        <h4 class="book-title hide_overflow" style="max-width: 138px">{{$book->title}}</h4>
-                        <p>{{$book->genres->name}}</p>
-                    </div>
-                    <div>
-                        <a class="small_btn" href="#"> button</a>
+    <div class="d-flex flex-wrap">
+        @foreach($genres as $genre)
+            <a href={{route('genre',['id'=>$genre->id])}} class="col-xl-2 col-sm-6 m-4">
+            <div > <!-- Added mb-4 class for bottom margin -->
+                <div class="card pl-5 pt-2 pb-2" >
+                    <div class="card-body p-3">
+                        <div class="row align-items-center">
+                            <div class="col-12 text-center">
+                                <div class="numbers">
+                                    <h3 class="font-weight-bolder mt-3 mb-0 hide-overflow" style="font-size: 1.5rem;">
+                                        {{$genre->name}}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div>
+    </a>
+        @endforeach
     </div>
+
+
 </x-app-layout>
+
+
