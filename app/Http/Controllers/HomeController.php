@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BookImage;
+use App\Models\Feedback;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
@@ -31,4 +32,28 @@ class HomeController extends Controller
             return view('genre',compact('books'))->with('error','Books within the designated genre are currently unavailable.');
         }
     }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $books = Book::search($search)->get();
+        return view('genre', compact('books'));
+    }
+
+    public function feedback(){
+        return view("feedback");
+    }
+    public function feedbackStore(Request $request){
+        $request->validate([
+           "feedback"  => ['required']
+        ]);
+
+
+        Feedback::create([
+           "name"=> $request->name,
+            "email" => $request->email,
+            "feedback" => $request->feedback,
+        ]);
+        return view('landing');
+    }
+
 }

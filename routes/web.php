@@ -13,6 +13,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'landing'])->name('landing');
 Route::get('genre/{id}', [HomeController::class, 'genre'])->name('genre');
+Route::get('search', [HomeController::class, 'search'])->name('search');
+Route::get('feedback', [HomeController::class, 'feedback'])->name('feedback');
+Route::post('feedback', [HomeController::class, 'feedbackStore'])->name('feedback');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -31,5 +31,20 @@ class Book extends Model
     public function image(){
         return $this->hasOne(BookImage::class, 'book_id');
     }
+    public function scopeSearch($query, $search)
+    {
+        return $query->with('genres', 'authors')
+            ->where('isDeleted', 0)
+            ->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%$search%");
+            })
+            ->orWhereHas('authors', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })
+            ->orWhereHas('genres', function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            });
+    }
+
 
 }

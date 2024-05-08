@@ -9,8 +9,8 @@
                      alt="">
             </a>
 
-            <form class="form-inline d-flex" style="width: 40rem; height: 3rem;">
-                <input class=" search mr-sm-2"  placeholder="Search...." aria-label="Search">
+            <form method="get" action={{route('search')}} class="form-inline d-flex" style="width: 40rem; height: 3rem;">
+                <input class=" search mr-sm-2"  placeholder="Search...." aria-label="Search" name="search">
                 <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
                     <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
                 </button>
