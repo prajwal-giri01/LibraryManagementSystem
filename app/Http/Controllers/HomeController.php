@@ -32,6 +32,12 @@ class HomeController extends Controller
             return view('genre',compact('books'))->with('error','Books within the designated genre are currently unavailable.');
         }
     }
+
+    public function genreAll()
+    {
+        $genres = Genre::where('isDeleted',0)->get();
+        return view('allCategories', compact('genres'));
+    }
     public function search(Request $request)
     {
         $search = $request->search;

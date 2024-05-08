@@ -54,7 +54,7 @@
                     @foreach($genres->take(15) as $genre)
                     <li><a href={{route('genre',['id'=>$genre->id])}}>{{$genre->name}}</a></li>
                     @endforeach
-                     <li><a href="#">See More...</a></li>
+                     <li><a href={{route('genre.all')}}>See More...</a></li>
                 </ul>
             </div>
             <div class="hero_view col-10 px-2">
