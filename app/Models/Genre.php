@@ -19,4 +19,10 @@ class Genre extends Model
     {
         return $this->hasMany(Book::class, 'genre');
     }
+
+
+    public function scopeSearch($query, $genre)
+    {
+        return $query->where('name', 'like', "%$genre%");
+    }
 }

@@ -2,12 +2,25 @@
 @section('main-content')
     <div class="ad_displayDetails col-10 mt-2">
         <div class=" w-full flex justify-center items-center">
-            <div class="rounded-lg shadow-md  max-w-sm w-full bg dark:bg-gray-800 p-5">
+            <div class="rounded-lg shadow-md   w-full bg dark:bg-gray-800 p-5">
                 <h2 class="text-center  text-white font-bold mb-6">Book Details</h2>
                 <form method="POST" action={{route("admin.book.update",['id'=>$book->id])}} class="space-y-4"
                       enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <div >
+                        <x-input-label for="image" :value="__('Book Cover')"/>
+                        <div class="user_profileCircleUp">
+                            <img id="image" class="avatar" src="{{ $book->image->image ? asset('storage/books/images/' . $book->id . '/' . $book->image->image) : asset('images/no-image.png') }}">
+                            <div class="upload-button">
+                                <i class="fa fa-camera"></i>
+                                <input name="image" class="input-file-upload" id="image"
+                                       type="file" accept="image/png, image/gif, image/jpeg, image/webp, image/jpg"
+                                       onchange="readURL(this);">
+                            </div>
+                        </div>
+                        <x-input-error :messages="$errors->get('image')" class="text-red-600"/>
+                    </div>
                     <div class="d-flex justify-between align-start mb-3">
                         <div class="col-5">
                             <x-input-label for="title" :value="__('Title')"/>
@@ -43,16 +56,11 @@
                             <x-input-error :messages="$errors->get('quantity')" class="text-red-600"/>
                         </div>
                     </div>
-                    <div class="d-flex justify-between align-start">
-                        <div class="col-5">
-                            <x-input-label for="image" :value="__('Book Cover')"/>
-                            <x-text-input id="image" name="image" type="file" class="mt-1 block w-full"
-                                          value="{{old('image')}}" style="background-color: white"/>
-                            <x-input-error :messages="$errors->get('image')" class="text-red-600"/>
-                        </div>
-
+                    <div class="col-12">
+                        <x-input-label for="description" :value="__('Description')"/>
+                        <textarea id="description" name="description" class="mt-1 block w-full rounded">{{$book->extra}}</textarea>
+                        <x-input-error :messages="$errors->get('description')" class="text-red-600"/>
                     </div>
-
                     <div class="mt-4">
                         <x-primary-button>{{ __('save') }}</x-primary-button>
                     </div>

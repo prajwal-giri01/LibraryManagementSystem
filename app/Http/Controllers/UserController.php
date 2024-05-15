@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function dashboard(Request $request)
+    {
+        $user = $request->user();
+        return view('user.dashboard',compact('user'));
+
+    }
     public function membership()
     {
         $memberships = membership::where('isdeleted',0)->get();

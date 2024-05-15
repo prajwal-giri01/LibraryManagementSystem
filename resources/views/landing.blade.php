@@ -9,14 +9,16 @@
                      alt="">
             </a>
 
-            <form method="get" action={{route('search')}} class="form-inline d-flex" style="width: 40rem; height: 3rem;">
-                <input class=" search mr-sm-2"  placeholder="Search...." aria-label="Search" name="search">
-                <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
-                </button>
+            <form method="get" action={{route('search')}} class="form-inline d-flex
+            " style="width: 40rem; height: 3rem;">
+            <input class="search mr-sm-2" placeholder="Search...." aria-label="Search" name="search" autocomplete="off">
+            <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
+                <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
+            </button>
             </form>
 
-            <div class="bg-main d-flex flex-wrap align-content-around" style="height: 38px;border-radius: 5px; font-weight: bold ; ">
+            <div class="bg-main d-flex flex-wrap align-content-around"
+                 style="height: 38px;border-radius: 5px; font-weight: bold ; ">
                 @if (Route::has('login'))
 
                     @auth
@@ -27,13 +29,15 @@
                             Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="rounded-md px-3 py-2 text-White ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        <a href="{{ route('login') }}"
+                           class="rounded-md px-3 py-2 text-White ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             Login
                         </a>
 
                         @if (Route::has('register'))
                             <span class="mt-2">|</span>
-                            <a     href="{{ route('register') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                            <a href="{{ route('register') }}"
+                               class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                                 Register
                             </a>
                         @endif
@@ -52,9 +56,10 @@
                 </h2>
                 <ul class="rightAl_list">
                     @foreach($genres->take(15) as $genre)
-                    <li><a href={{route('genre',['id'=>$genre->id])}}>{{$genre->name}}</a></li>
+                        <li class="hide_overflow"><a href={{route('genre',['id'=>$genre->id])}}>{{$genre->name}}</a>
+                        </li>
                     @endforeach
-                     <li><a href={{route('genre.all')}}>See More...</a></li>
+                    <li><a href={{route('genre.all')}}>See More...</a></li>
                 </ul>
             </div>
             <div class="hero_view col-10 px-2">
@@ -65,62 +70,50 @@
                     <h3 class="medium_title">Most Popular Books</h3>
                     <div class="d-flex justify-between small_slider">
                         @foreach($books->take(4) as $book)
-
-                            <div class="book-card">
-                                <img src="{{ $book->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
-                                <div class="book-details d-flex justify-between bg text-white">
-                                    <div class="details">
-                                        <h4 class="book-title hide_overflow" style="max-width: 138px">{{$book->title}}</h4>
-                                        <p>{{$book->genres->name}}</p>
-                                    </div>
-                                    <div>
-                                        <a class="small_btn" href="#"> button</a>
+                            <a href={{route('book',["id"=>$book->id])}}>
+                                <div class="book-card">
+                                    <img
+                                        src="{{ $book->image->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
+                                    <div class="book-details d-flex justify-between bg text-white">
+                                        <div class="details">
+                                            <h4 class="book-title hide_overflow"
+                                                style="max-width: 138px">{{$book->title}}</h4>
+                                            <p>{{$book->genres->name}}</p>
+                                        </div>
+                                        <div>
+                                            <a class="small_btn" href="#"> button</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
 
-                        {{--                        <div>--}}
-{{--                            <img src="{{asset("images/harrypoter2.png")}}">--}}
-{{--                            <div class="book_details d-flex justify-between">--}}
-{{--                                <div class="details">--}}
-{{--                                    <h4>book Name</h4>--}}
-{{--                                    <p>Genre</p>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <a class="small_btn" href="#"> button</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <img src="{{asset("images/harrypoter3.png")}}">--}}
-{{--                            <div class="book_details d-flex justify-between">--}}
-{{--                                <div class="details">--}}
-{{--                                    <h4>book Name</h4>--}}
-{{--                                    <p>Genre</p>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <a class="small_btn" href="#"> button</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <img src="{{asset("images/harrypoter4.png")}}">--}}
-{{--                            <div class="book_details d-flex justify-between">--}}
-{{--                                <div class="details">--}}
-{{--                                    <h4>book Name</h4>--}}
-{{--                                    <p>Genre</p>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <a class="small_btn" href="#"> button</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </div>
 
 
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="container mt-4">
+        <p class="h1">All Books </p>
+        <div class="d-flex  small_slider flex-wrap mt-3 justify-between">
+            @foreach($books as $book)
+                <a href={{route('book',["id"=>$book->id])}}>
+                    <div class="book-card">
+                        <img src="{{ $book->image->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
+                        <div class="book-details d-flex justify-between bg text-white">
+                            <div class="details">
+                                <h4 class="book-title hide_overflow" style="max-width: 138px">{{$book->title}}</h4>
+                                <p>{{$book->genres->name}}</p>
+                            </div>
+                            <div>
+                                <a class="small_btn" href="#"> button</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            @endforeach
         </div>
     </section>
 </x-app-layout>

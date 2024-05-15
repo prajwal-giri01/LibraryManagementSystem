@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer("uId")->nullable();
             $table->boolean("isDeleted")->default(0);
             $table->timestamps();
-            $table->string("extra")->nullable();
+            $table->longText("extra")->nullable();
 
         });
     }

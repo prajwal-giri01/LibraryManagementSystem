@@ -18,5 +18,16 @@ class Author extends Model
     public function books()
     {
         return $this->hasMany(Book::class);
+
     }
+    public function scopeSearch($query, $author)
+    {
+        return $query->where('name', 'like', "%$author%");
+    }
+
+
+
+
 }
+
+

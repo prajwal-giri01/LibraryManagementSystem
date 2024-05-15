@@ -14,11 +14,11 @@ class membershipSeeder extends Seeder
      */
     public function run(): void
     {
-        $memberships =[
-          ["Basic Membership",5,500],
-          ["Standard Membership",10,1000],
-          ["Premium Membership",15,1500],
-          ["VIP Membership",20,2000],
+        $memberships = [
+            ["Basic", 5, 500, "Access to basic features"],
+            ["Standard", 10, 1000, "Access to standard features"],
+            ["Premium", 15, 1500, "Access to premium features"],
+            ["VIP", 20, 2000, "Access to VIP features"],
         ];
 
         foreach ($memberships as $membership){
@@ -30,6 +30,7 @@ class membershipSeeder extends Seeder
                 "uId" => 1,
                 "created_at" => Carbon::now(),
                 "updated_at" => Carbon::now(),
+                "Extra" => $membership[3],
             ]);
         }
     }

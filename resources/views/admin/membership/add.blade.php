@@ -2,7 +2,7 @@
 @section('main-content')
     <div class="ad_displayDetails col-10 mt-2">
         <div class=" w-full flex justify-center items-center">
-            <div class="rounded-lg shadow-md  max-w-sm w-full bg dark:bg-gray-800 p-5">
+            <div class="rounded-lg shadow-md   w-full bg dark:bg-gray-800 p-5">
                 <h2 class="text-center  text-white font-bold mb-6">Membership Details</h2>
                 <form method="POST" action={{route("admin.membership.store")}} class="space-y-4">
                     @csrf

@@ -200,7 +200,7 @@ p {
     background-color: #3c3c3c;
     padding: 5px 10px;
     color: #c2c7d0;
-    height: 100svh;
+    min-height: 100svh;
     margin-top: 1px;
 }
 .ad_menu li a {
@@ -480,4 +480,105 @@ input[type=number] {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+#messengerButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+.feedback{
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+}
+.modal-dialog{
+    width: 20rem !important;
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 1rem !important;
+}
+
+.user_profileCircleUp {
+    /* border-radius: 1000px !important; */
+    width: 140px;
+    height: 140px;
+    /* border: 8px solid #efefef; */
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.user_profileCircleUp .avatar {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center center;
+    object-position: center center;
+    padding: 0;
+    margin: 0;
+    /* border-radius: 1000px !important; */
+    border-radius: 10px !important;
+    border: 8px solid #c9c9c9;
+
+
+}
+
+.user_profileCircleUp .upload-button {
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    color: #ffffff;
+    background: #0178bc;
+    padding: 9px;
+    border-radius: 50%;
+    line-height: 12px;
+    font-size: 14px;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    cursor: pointer;
+}
+
+.user_profileCircleUp .upload-button::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    top: -4px;
+    bottom: -4px;
+    border: 4px solid rgba(1, 120, 188, 0.54);
+    border-radius: 50%;
+}
+
+.user_profileCircleUp .input-file-upload {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    font-size: 0;
+    width: 100%;
+}
+.book_title{
+    font-size: xxx-large;
+    font-weight: bold;
+}
+.genre{
+    --bs-badge-padding-x: 0.65em;
+    --bs-badge-padding-y: 0.35em;
+    --bs-badge-font-size: 0.75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: var(--bs-border-radius);
+    display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-weight: var(--bs-badge-font-weight);
+    color: var(--bs-badge-color);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
 }

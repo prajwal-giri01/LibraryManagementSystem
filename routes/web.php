@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\GenreController;
 use App\Http\Controllers\admin\MembershipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,14 +16,21 @@ Route::get('/', [HomeController::class, 'landing'])->name('landing');
 Route::get('genre/{id}', [HomeController::class, 'genre'])->name('genre');
 Route::get('genre', [HomeController::class, 'genreAll'])->name('genre.all');
 Route::get('search', [HomeController::class, 'search'])->name('search');
-Route::get('feedback', [HomeController::class, 'feedback'])->name('feedback');
-Route::post('feedback', [HomeController::class, 'feedbackStore'])->name('feedback');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('book/{id}', [HomeController::class, 'book'])->name('book');
+Route::post('feedback', [HomeController::class, 'feedback'])->name('feedback');
+
+
+Route::group(['middleware' => ['auth', 'verified']], function (){
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/membership', [UserController::class, 'membership'])->name('membership');
+});
+
 
 Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin'],function(){
     Route::get('dashboard',[AuthorController::class, 'showDashboard'])->name('admin.dashboard');
+    Route::get('feedback',[AuthorController::class, 'feedback'])->name('admin.feedback');
+    Route::get('feedback/{id}',[AuthorController::class, 'feedbackSingle'])->name('admin.feedback.single');
+    Route::delete('feedback/{id}',[AuthorController::class, 'destroyFeedback'])->name('admin.feedback.delete');
     // Author
     Route::get('author',[AuthorController::class, 'index'])->name('admin.author');
     Route::get('author/add',[AuthorController::class, 'show'])->name('admin.author.add');

@@ -2,7 +2,7 @@
 @section('main-content')
     <div class="ad_displayDetails col-10 d-flex">
         <div class="author_form w-full flex justify-center items-center">
-            <div class="author_from rounded-lg shadow-md p-8 max-w-sm w-full bg dark:bg-gray-800">
+            <div class="author_from rounded-lg shadow-md p-8  w-full bg dark:bg-gray-800">
                 <h2 class="text-center  text-white font-bold mb-6">Author Details</h2>
                 <form method="POST" action={{route("admin.author.store")}} class="space-y-4">
                     @csrf

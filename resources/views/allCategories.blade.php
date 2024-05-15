@@ -13,7 +13,7 @@
                 <input class=" search mr-sm-2" placeholder="Search...." aria-label="Search">
                 <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
                     <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
-                </button>
+                </button >
             </form>
 
             <div class="bg-main d-flex flex-wrap align-content-around"

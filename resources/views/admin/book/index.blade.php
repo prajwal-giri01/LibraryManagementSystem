@@ -1,9 +1,14 @@
 @extends('admin.sideMenu')
 @section("main-content")
     <div class="ad_displayDetails col-10">
-        <div class="d-flex">
-            <div class="detail_top col-10">
-                <h2>Books</h2>
+        <div class="d-flex detail_top">
+            <div class=" col-10">
+                <form method="get" action={{route('admin.book')}} class="form-inline d-flex" style="width: auto; height: 3rem;">
+                <input class="search mr-sm-2 text-black"  placeholder="Search...." aria-label="Search" name="book" autocomplete="off">
+                <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
+                </button>
+                </form>
             </div>
             <div class="cta_container col-2">
                 <a href={{route("admin.book.trash.index")}}><i class="fa-solid fa-trash"></i></a>

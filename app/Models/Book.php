@@ -14,7 +14,8 @@ class Book extends Model
         'genre',
         'quantity',
         'cId',
-        'uId'
+        'uId',
+        'Extra',
     ];
     protected $table="book";
 
@@ -29,8 +30,11 @@ class Book extends Model
     }
 
     public function image(){
-        return $this->hasOne(BookImage::class, 'book_id');
+        return $this->hasOne(BookImage::class, 'book_id')->withDefault([
+            'name' => 'no-image.jpg'
+        ]);
     }
+
     public function scopeSearch($query, $search)
     {
         return $query->with('genres', 'authors')
@@ -45,6 +49,12 @@ class Book extends Model
                 $query->where('name', 'like', "%$search%");
             });
     }
+
+    public function scopeFilter($query, $book)
+    {
+        return $query->where('title', 'like', "%$book%");
+    }
+
 
 
 }

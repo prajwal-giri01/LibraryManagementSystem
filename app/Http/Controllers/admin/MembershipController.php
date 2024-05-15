@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
-    public function index(){
-        $memberships = Membership::where('isDeleted', 0)->paginate(10);
+    public function index(Request $request){
+        $membership = $request->membership;
+        $memberships = Membership::where('isDeleted', 0)->search($membership)->paginate(10);
         return view('admin.membership.index',compact('memberships'));
     }
     public function trash($id) {

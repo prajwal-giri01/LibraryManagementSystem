@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    public function index(){
-    $genres = Genre::where('isDeleted', 0)->paginate(10);
+    public function index(Request $request){
+        $genre = $request->genre;
+    $genres = Genre::where('isDeleted', 0)->search($genre)->paginate(10);
     return view('admin.genre.index',compact('genres'));
 }
 
@@ -38,7 +39,7 @@ public function show()
     public function store(Request $request){
 
         $request->validate([
-            'name'=>[' required', 'string','unique:author']
+            'name'=>[' required', 'string','unique:genre']
         ]);
         Genre::create([
             'name'=>$request->name,
@@ -57,7 +58,7 @@ public function show()
     public function update($id, Request $request)
     {
         $request->validate([
-            'name'=>[' required', 'string','unique:author']
+            'name'=>[' required', 'string','unique:genre']
         ]);
         Genre::where('id', $id)->update([
             'name' => $request->name,

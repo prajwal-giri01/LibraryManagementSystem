@@ -19,6 +19,8 @@
                 </li>
                 <li class="nav-item {{ Request::is('admin/membership') || Request::is('admin/trash/membership') || Request::is('admin/membership/add') || Request::is('admin/membership/edit/*') ? 'active' : '' }}">
                     <a href={{route('admin.membership')}}><i class="fa-regular fa-address-card"></i>Membership</a>
+                </li>  <li class="nav-item {{ Request::is('admin/feedback') || Request::is('admin/feedback/*') ? 'active' : '' }}">
+                    <a href={{route('admin.feedback')}}><i class="fa-solid fa-comments"></i>Feedback</a>
                 </li>
 
             </ul>

@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index(){
-        $books = Book::with(['authors', 'genres'])->where('isDeleted', 0)->paginate(10);
+    public function index(Request $request){
+        $book = $request->book;
+        $books = Book::with(['authors', 'genres'])->filter($book)->where('isDeleted', 0)->paginate(10);
 //dd($books);
         return view('admin.book.index', compact('books'));
     }
@@ -35,8 +36,8 @@ class BookController extends Controller
         return redirect()->back();
     }
     public function show(){
-        $authors = Author::where('isDeleted',0)->get();
-        $genres = Genre::where('isDeleted',0)->get();
+        $authors = Author::where('isDeleted', 0)->orderBy('name')->get();
+        $genres = Genre::where('isDeleted', 0)->orderBy('name')->get();
         return view('admin.book.add',compact('authors','genres'));
     }
 
@@ -46,8 +47,9 @@ class BookController extends Controller
            'title' => [' required', 'string', 'unique:book'],
             'author' => [ 'required', 'exists:author,id'] ,
             'genre' => [ 'required', 'exists:genre,id'],
-            'quantity' => [ 'required', 'integer'],
+            'quantity' => [ 'required', 'integer','gt:0'],
             'image' => ['required','mimes:jpg,jpeg,mp4,mov,ogg'],
+            'description' => [' required', 'string'],
         ]);
         $image=$request->image;
         $image_name = date('Y-m-d') . '--' . (pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $image->getClientOriginalExtension();
@@ -61,6 +63,7 @@ class BookController extends Controller
                 'author' => $request->author,
                 'genre' => $request->genre,
                 'quantity' => $request->quantity,
+                'Extra' => $request->description,
             ]);
 
             BookImage::create([
@@ -79,9 +82,9 @@ class BookController extends Controller
     }
 
     public function edit($id){
-        $book = Book::find($id);
-        $authors = Author::where('isDeleted',0)->get();
-        $genres = Genre::where('isDeleted',0)->get();
+        $book = Book::with('image')->find($id);
+        $authors = Author::where('isDeleted', 0)->orderBy('name')->get();
+        $genres = Genre::where('isDeleted', 0)->orderBy('name')->get();
         return view('admin.book.edit',compact('book','authors','genres'));
     }
 
@@ -90,7 +93,8 @@ class BookController extends Controller
             'title' => ['required', 'string', 'unique:book,title,'.$id],
             'author' => ['required', 'exists:author,id'],
             'genre' => ['required', 'exists:genre,id'],
-            'quantity' => ['required', 'integer'],
+            'quantity' => ['required', 'integer', 'gt:0'],
+            'description' => [' required', 'string'],
         ]);
 
         if($request->has('image')){
@@ -108,6 +112,7 @@ class BookController extends Controller
                 'author' => $request->author,
                 'genre' => $request->genre,
                 'quantity' => $request->quantity,
+                'Extra' => $request->description,
             ]);
             if($request->has('image')) {
                 $image=$request->image;

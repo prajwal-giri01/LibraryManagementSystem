@@ -1,6 +1,6 @@
 @extends('admin.sideMenu')
 @section("main-content")
-    <div class="ad_displayDetails col-10">
+    <div class="ad_displayDetails col-10 ">
 
         <div class="row text-center ">
             <div class="col-xl-4 col-sm-6 mb-xl-0 ">
@@ -11,7 +11,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Admin</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                        10
+                                        {{$adminUsersCount}}
                                     </h3>
                                 </div>
                             </div>
@@ -27,7 +27,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Users</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                        10
+                                        {{$usersCount}}
                                     </h3>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Membership</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                        10
+                                        {{$membershipsCount}}
                                     </h3>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Author</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                        10
+                                        {{$authorsCount}}
                                     </h3>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Genre</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                       10
+                                       {{$genresCount}}
                                     </h3>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                 <div class="numbers">
                                     <h5 class="text mb-0 text-uppercase font-weight-bold">Books</h5>
                                     <h3 class="font-weight-bolder mt-3 mb-0" style="font-size: 2.5rem;">
-                                       10
+                                       {{$booksCount}}
                                     </h3>
                                 </div>
                             </div>

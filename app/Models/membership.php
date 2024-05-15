@@ -20,4 +20,10 @@ class membership extends Model
         'Extra',
     ];
     protected $table = "membershiptable";
+
+
+    public function scopeSearch($query, $membership)
+    {
+        return $query->where('membershipLevel', 'like', "%$membership%");
+    }
 }
