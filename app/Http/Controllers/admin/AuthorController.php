@@ -109,7 +109,8 @@ class AuthorController extends Controller
     {
         Author::destroy($id);
         return redirect()->back()->with('message', 'Author Deleted Successfully');
-    }    public function destroyFeedback($id)
+    }
+    public function destroyFeedback($id)
     {
         Feedback::destroy($id);
         return redirect()->back()->with('message', 'Feedback Deleted Successfully');

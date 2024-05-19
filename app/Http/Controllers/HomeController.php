@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\BookImage;
+use App\Models\Delivery;
 use App\Models\Feedback;
 use App\Models\Genre;
 use App\Models\membership;
@@ -15,14 +16,14 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function landing(){
-
+        $addresses = Delivery::where('isDeleted', 0)->get();
         $genres = Genre::where('isDeleted', 0)
             ->whereHas('books')
             ->get();
-        $books = Book::with('genres','image')->where('isDeleted',0)->get();
+        $books = Book::with('genres','image','authors')->where('isDeleted',0)->get();
 
 
-        return view('landing', compact('genres', 'books'));
+        return view('landing', compact('genres', 'books','addresses'));
     }
 
     public function genre($id)
@@ -65,7 +66,7 @@ class HomeController extends Controller
             "email" => $request->email,
             "feedback" => $request->feedback,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('message','feedback recorded');
     }
     public function book($id)
     {

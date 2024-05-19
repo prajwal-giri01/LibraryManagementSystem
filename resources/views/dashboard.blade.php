@@ -7,7 +7,7 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                            <a class="navbar-brand" href="{{ route('landing') }}">
                                 <img src={{asset("images/herald-white-logo.svg")}} width="30" height="30"
                                      class="d-inline-block align-top logo"
                                      alt="website dashboard">

@@ -19,7 +19,17 @@
                 </li>
                 <li class="nav-item {{ Request::is('admin/membership') || Request::is('admin/trash/membership') || Request::is('admin/membership/add') || Request::is('admin/membership/edit/*') ? 'active' : '' }}">
                     <a href={{route('admin.membership')}}><i class="fa-regular fa-address-card"></i>Membership</a>
-                </li>  <li class="nav-item {{ Request::is('admin/feedback') || Request::is('admin/feedback/*') ? 'active' : '' }}">
+                </li>
+                <li class="nav-item {{ Request::is('admin/user/membership') || Request::is('admin/user/membership/*') ? 'active' : '' }}">
+                    <a href={{route('admin.user.membership')}}><i class="fa-regular fa-credit-card"></i>Purchase Membership</a>
+                </li>
+                <li class="nav-item {{ Request::is('admin/book/rent') || Request::is('admin/book/rent/*') ? 'active' : '' }}">
+                    <a href={{route('admin.book.rent')}}><i class="fa-solid fa-book-open"></i>Rented Book </a>
+                </li>
+                <li class="nav-item {{ Request::is('admin/location') ||Request::is('admin/trash/location') || Request::is('admin/location/add') || Request::is('admin/location/edit/*')  ? 'active' : '' }}">
+                    <a href={{route('admin.location')}}><i class="fa-solid fa-truck"></i>Location</a>
+                </li>
+                <li class="nav-item {{ Request::is('admin/feedback') || Request::is('admin/feedback/*') ? 'active' : '' }}">
                     <a href={{route('admin.feedback')}}><i class="fa-solid fa-comments"></i>Feedback</a>
                 </li>
 

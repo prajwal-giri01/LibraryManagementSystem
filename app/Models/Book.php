@@ -34,6 +34,9 @@ class Book extends Model
             'name' => 'no-image.jpg'
         ]);
     }
+    public function rentbook(){
+        return $this->hasMany(Rentbook::class,'book_id');
+    }
 
     public function scopeSearch($query, $search)
     {

@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'isAdmin',
         'password',
+        'isDeleted'
 
     ];
 
@@ -46,5 +47,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function userHasMembership()
+    {
+        return $this->hasOne(userHasMembership::class,'user_id');
+    }
+
+    public function rentbook(){
+        return $this->hasMany(Rentbook::class,'user_id');
     }
 }

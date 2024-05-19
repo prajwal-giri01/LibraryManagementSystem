@@ -232,7 +232,7 @@ p {
 }
 
 .detail_top {
-    background-color: #17a2b8;
+    background-color: #858585;
     color: #fff;
     padding: 10px 10px;
     border-radius: 4px;
@@ -469,12 +469,11 @@ input[type=number] {
 
 .book-title {
     margin-bottom: 5px;
-    overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    text-wrap: nowrap;
 }
 
-.hide-overflow{
+.hide-overflow {
     display: block;
     width: 90%;
     overflow: hidden;
@@ -499,7 +498,14 @@ input[type=number] {
     right: 0 !important;
     bottom: 1rem !important;
 }
-
+.modalqr{
+    width: 20rem !important;
+    position: fixed !important;
+    right: 0 !important;
+    bottom: 1rem !important;
+    left: 0 !important;
+    top: 0 !important;
+}
 .user_profileCircleUp {
     /* border-radius: 1000px !important; */
     width: 140px;
@@ -582,3 +588,4 @@ input[type=number] {
     vertical-align: baseline;
     border-radius: var(--bs-badge-border-radius);
 }
+

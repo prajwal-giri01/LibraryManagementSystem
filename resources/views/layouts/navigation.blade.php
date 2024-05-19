@@ -6,7 +6,7 @@
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
-                        <a class="navbar-brand" href="{{ auth()->user()->isAdmin == 0? url('/dashboard'): url('admin/dashboard') }}">
+                        <a class="navbar-brand" href="{{ auth()->user()->isAdmin == 0? url('/'): url('admin/dashboard') }}">
                             <img src={{asset("images/herald-white-logo.svg")}} width="30" height="30"
                                  class="d-inline-block align-top logo"
                                  alt="website dashboard">
@@ -27,10 +27,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            @if(auth()->user()->isAdmin == 1)
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-
+                            @endif
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

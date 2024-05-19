@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AuthorController;
 use App\Http\Controllers\admin\BookController;
+use App\Http\Controllers\admin\DeliveryController;
 use App\Http\Controllers\admin\GenreController;
 use App\Http\Controllers\admin\MembershipController;
 use App\Http\Controllers\HomeController;
@@ -23,14 +24,28 @@ Route::post('feedback', [HomeController::class, 'feedback'])->name('feedback');
 Route::group(['middleware' => ['auth', 'verified']], function (){
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/membership', [UserController::class, 'membership'])->name('membership');
+    Route::get('book', [UserController::class, 'bookOrder'])->name('user.book.order');
+    Route::get('rent/history', [UserController::class, 'bookOrderHistory'])->name('user.book.order.history');
+    Route::post('/membership/{id}', [UserController::class, 'membershipPurchase'])->name('membership.purchase');
+    Route::post('/book/rent/pickup/{id}', [UserController::class, 'bookPurchasePickup'])->name('book.purchase.pickup');
+    Route::post('/book/rent/delivery/{id}', [UserController::class, 'bookPurchaseDelivery'])->name('book.purchase.delivery');
 });
 
 
 Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin'],function(){
     Route::get('dashboard',[AuthorController::class, 'showDashboard'])->name('admin.dashboard');
+
+    //rented book
+    Route::get('book/rent',[BookController::class,'rent'])->name('admin.book.rent');
+    Route::get('book/rent/single/{id}',[BookController::class,'rentSingle'])->name('admin.rented.book.single');
+    Route::get('book/status/ongoing/{id}',[BookController::class,'statusOngoing'])->name('admin.book.status.ongoing');
+    Route::post('book/status/completed/{id}',[BookController::class,'statusCompleted'])->name('admin.book.status.completed');
+
+    //feedback
     Route::get('feedback',[AuthorController::class, 'feedback'])->name('admin.feedback');
     Route::get('feedback/{id}',[AuthorController::class, 'feedbackSingle'])->name('admin.feedback.single');
     Route::delete('feedback/{id}',[AuthorController::class, 'destroyFeedback'])->name('admin.feedback.delete');
+
     // Author
     Route::get('author',[AuthorController::class, 'index'])->name('admin.author');
     Route::get('author/add',[AuthorController::class, 'show'])->name('admin.author.add');
@@ -41,6 +56,17 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
     Route::get('trash/author',[AuthorController::class, 'trashshow'])->name('admin.author.trash.index');
     Route::get('restore/author/{id}',[AuthorController::class,'restore'])->name('admin.author.restore');
     Route::delete('delete/author/{id}',[AuthorController::class,'destroy'])->name('admin.author.delete');
+
+    // location
+    Route::get('location',[DeliveryController::class, 'index'])->name('admin.location');
+    Route::get('location/add',[DeliveryController::class, 'show'])->name('admin.location.add');
+    Route::post('location/store',[DeliveryController::class, 'store'])->name('admin.location.store');
+    Route::get('location/edit/{id}',[DeliveryController::class, 'edit'])->name('admin.location.edit');
+    Route::PUT('location/update/{id}',[DeliveryController::class, 'update'])->name('admin.location.update');
+    Route::get('location/{id}',[DeliveryController::class, 'trash'])->name('admin.location.trash');
+    Route::get('trash/location',[DeliveryController::class, 'trashshow'])->name('admin.location.trash.index');
+    Route::get('restore/location/{id}',[DeliveryController::class,'restore'])->name('admin.location.restore');
+    Route::delete('delete/location/{id}',[DeliveryController::class,'destroy'])->name('admin.location.delete');
 
     //Genre
     Route::get('genre',[GenreController::class, 'index'])->name('admin.genre');
@@ -61,7 +87,7 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
     Route::put('book/edit/{id}',[BookController::class, 'update'])->name('admin.book.update');
     Route::get('book/{id}',[BookController::class, 'trash'])->name('admin.book.trash');
     Route::get('trash/book',[BookController::class, 'trashshow'])->name('admin.book.trash.index');
-    Route::get('restore/book/{id}' ,[BookController::class,'restore' ])->name('admin.book.restore');
+    Route::get('restore/book/{id}',[BookController::class,'restore'])->name('admin.book.restore');
     Route::delete('delete/book/{id}',[BookController::class,'destroy'])->name('admin.book.delete');
 
     //Membership
@@ -74,6 +100,16 @@ Route::group(['middleware' => ['auth', 'verified','isAdmin'], 'prefix'=>'admin']
     Route::get('trash/membership',[MembershipController::class, 'trashshow'])->name('admin.membership.trash.index');
     Route::get('restore/membership/{id}' ,[MembershipController::class,'restore' ])->name('admin.membership.restore');
     Route::delete('delete/membership/{id}',[MembershipController::class,'destroy'])->name('admin.membership.delete');
+
+    //userHasMembership
+    Route::get('user/membership',[MembershipController::class, 'userMembership'])->name('admin.user.membership');
+    Route::get('user/membership/purchase',[MembershipController::class, 'userMembershipPurchase'])->name('admin.membership.purchase');
+    Route::post('user/membership/purchase/store',[MembershipController::class, 'userMembershipPurchaseStore'])->name('admin.membership.purchase.store');
+    Route::get('user/membership/approve/{id}',[MembershipController::class, 'userMembershipPurchaseApprove'])->name('admin.membership.approve');
+    Route::get('user/membership/approve/store/{id}',[MembershipController::class, 'userMembershipPurchaseApproveStore'])->name('admin.membership.approve.store');
+
+
+
 });
 
 

@@ -14,8 +14,8 @@
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
     >{{ __('Delete Account') }}</x-danger-button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()"  focusable>
+        <form method="post" action="{{ route('profile.destroy') }}" class="p-6  dark:bg-gray-800 shadow sm:rounded-lg">
             @csrf
             @method('delete')
 
@@ -42,7 +42,7 @@
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-secondary-button x-on:click="$dispatch('close')" class="text-black">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 

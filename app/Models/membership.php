@@ -26,4 +26,8 @@ class membership extends Model
     {
         return $query->where('membershipLevel', 'like', "%$membership%");
     }
+
+    public function userhasMembership(){
+        return $this->hasOne(userHasMembership::class, 'membership_id');
+}
 }

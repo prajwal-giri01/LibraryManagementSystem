@@ -22,12 +22,36 @@
                 @if (Route::has('login'))
 
                     @auth
-                        <a href="{{ auth()->user()->isAdmin == 0? url('/dashboard'): url('admin/dashboard') }}"
+                        <div class="hidden sm:flex sm:items-center ">
+                            <x-dropdown align="right" width="48">
+                                <x-slot name="trigger">
+                                    <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white text-white-500 dark:white-gray-400 bg-main  hover:text-white-700 dark:hover:text-white-300 focus:outline-none transition ease-in-out duration-150">
+                                        {{ Auth::user()->name }}
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
 
-                           class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                        >
-                            Dashboard
-                        </a>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('dashboard')">
+                                        {{ __('Dashboard') }}
+                                    </x-dropdown-link>
+
+                                    <!-- Authentication -->
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+
+                                        <x-dropdown-link :href="route('logout')"
+                                                         onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
                     @else
                         <a href="{{ route('login') }}"
                            class="rounded-md px-3 py-2 text-White ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
@@ -70,22 +94,7 @@
                     <h3 class="medium_title">Most Popular Books</h3>
                     <div class="d-flex justify-between small_slider">
                         @foreach($books->take(4) as $book)
-                            <a href={{route('book',["id"=>$book->id])}}>
-                                <div class="book-card">
-                                    <img
-                                        src="{{ $book->image->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
-                                    <div class="book-details d-flex justify-between bg text-white">
-                                        <div class="details">
-                                            <h4 class="book-title hide_overflow"
-                                                style="max-width: 138px">{{$book->title}}</h4>
-                                            <p>{{$book->genres->name}}</p>
-                                        </div>
-                                        <div>
-                                            <a class="small_btn" href="#"> button</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                                <x-bookCard :book="$book" :addresses="$addresses"/>
                         @endforeach
 
                     </div>
@@ -99,20 +108,7 @@
         <p class="h1">All Books </p>
         <div class="d-flex  small_slider flex-wrap mt-3 justify-between">
             @foreach($books as $book)
-                <a href={{route('book',["id"=>$book->id])}}>
-                    <div class="book-card">
-                        <img src="{{ $book->image->image ? asset("storage/books/images/$book->id/" . $book->image->image) : asset("images/no-image.jpg") }}">
-                        <div class="book-details d-flex justify-between bg text-white">
-                            <div class="details">
-                                <h4 class="book-title hide_overflow" style="max-width: 138px">{{$book->title}}</h4>
-                                <p>{{$book->genres->name}}</p>
-                            </div>
-                            <div>
-                                <a class="small_btn" href="#"> button</a>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                    <x-bookCard :book="$book" :addresses="$addresses"/>
             @endforeach
         </div>
     </section>

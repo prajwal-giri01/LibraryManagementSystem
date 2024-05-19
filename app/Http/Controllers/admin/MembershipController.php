@@ -4,6 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\membership;
+use App\Models\User;
+use App\Models\userHasMembership;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
@@ -80,5 +83,55 @@ class MembershipController extends Controller
     public function destroy($id) {
         Membership::destroy($id);
         return redirect()->back();
+    }
+
+
+    //user purchase membership
+
+    public function userMembership(){
+
+        $userhasMemberships  = UserHasMembership::with('user','membership')->orderBy('endingDate', 'desc')->paginate(10);
+
+        return view('admin.userHasMembership.index',compact('userhasMemberships'));
+    }
+
+    public function userMembershipPurchase(){
+        $users = User::where('isDeleted',0)->get();
+        $memberships = Membership::where('isDeleted', 0)->get();
+        return view('admin.userHasMembership.add',compact('users', 'memberships'));
+    }
+    public function userMembershipPurchaseStore(Request $request){
+        $request->validate([
+           'email' => ['required'],
+           'membership' => ['required'],
+        ]);
+        $user =  User::find($request->email);
+        $membership = membership::find($request->membership);
+        userHasMembership::create([
+            'user_id' => $user->id,
+            'membership_id' => $membership->id,
+            'status' => 'Active',
+            'endingDate' => Carbon::now()->addDays(30),
+
+        ]);
+
+        return redirect()->back()->with('message','membership activated successfully');
+    }
+
+    public function userMembershipPurchaseApprove($id){
+        $userMembershipPurchaseApprove = userHasMembership::with(['user','membership'])->find($id);
+        return view('admin.userHasMembership.approve',compact('userMembershipPurchaseApprove'));
+    }
+
+    public function userMembershipPurchaseApproveStore($id)
+    {
+        $membership = userHasMembership::find($id);
+        $membership->update([
+           'status' => 'Active',
+            'startingDate' => Carbon::now(),
+            'endingDate' => Carbon::now()->addDays(30),
+        ]);
+        return redirect()->back()->with('message','membership approved successfully');
+
     }
 }
