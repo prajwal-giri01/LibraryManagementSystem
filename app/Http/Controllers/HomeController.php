@@ -48,9 +48,10 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
+        $addresses = Delivery::where('isDeleted', 0)->get();
         $search = $request->search;
         $books = Book::search($search)->get();
-        return view('genre', compact('books'));
+        return view('genre', compact('books','addresses'));
     }
 
 
