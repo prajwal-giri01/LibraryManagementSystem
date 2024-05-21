@@ -76,7 +76,7 @@
         <div class="d-flex  small_slider flex-wrap mt-3">
             @foreach($books as $book)
                 <a href={{route('book',["id"=>$book->id])}}>
-                    <x-bookCard :book="$book"/>
+                    <x-bookCard :book="$book" :addresses="$addresses"/>
                 </a>
             @endforeach
         </div>

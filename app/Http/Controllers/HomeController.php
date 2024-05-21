@@ -28,13 +28,14 @@ class HomeController extends Controller
 
     public function genre($id)
     {
+        $addresses = Delivery::where('isDeleted', 0)->get();
         $books = Book::where([
             ['genre', $id],
             ['isDeleted', 0]
         ])->get();
 
 
-        return view('genre', compact('books'));
+        return view('genre', compact('books','addresses'));
     }
 
 
@@ -70,9 +71,10 @@ class HomeController extends Controller
     }
     public function book($id)
     {
+        $addresses = Delivery::where('isDeleted', 0)->get();
         $book = Book::with('authors','image','genres')->find($id);
         $books = Book::with('authors','image','genres')->where('genre', $book->genre)->get();
-        return view('bookDetail',compact('book','books'));
+        return view('bookDetail',compact('book','books','addresses'));
     }
 
 }

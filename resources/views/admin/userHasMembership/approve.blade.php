@@ -58,7 +58,7 @@
                     </div>
                     <div class="mb-3">
                         <h5 class="card-title">Proof:</h5>
-                        <img src="{{ $userMembershipPurchaseApprove->qr != NULL ? asset('membership/' . $userMembershipPurchaseApprove->user->id . '/' . $userMembershipPurchaseApprove->qr) : asset('images/no-image.png') }}"
+                        <img src="{{ $userMembershipPurchaseApprove->qr != NULL ? asset('storage/membership/'. $userMembershipPurchaseApprove->user->id . '/' . $userMembershipPurchaseApprove->qr) : asset('images/no-image.png') }}"
                              alt="ProofImage" class="img-fluid img-thumbnail">
                     </div>
 

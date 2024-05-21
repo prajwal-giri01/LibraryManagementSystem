@@ -100,7 +100,7 @@
         <h1 class="h1"> Similar Books</h1>
         <div class="d-flex justify-between small_slider flex-wrap mt-3">
             @foreach($books as $book)
-                    <x-bookCard :book="$book"/>
+                <x-bookCard :book="$book" :addresses="$addresses"/>
             @endforeach
         </div>
     </div>

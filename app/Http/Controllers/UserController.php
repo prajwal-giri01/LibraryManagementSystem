@@ -23,82 +23,101 @@ class UserController extends Controller
 
     public function membership()
     {
-        $userHasValidMembership = userHasMembership::where('user_id',auth()->user()->id)->where('status','active')->first();
+        $userHasValidMembership = userHasMembership::where('user_id', auth()->user()->id)->where('status', 'active')->first();
         if ($userHasValidMembership) {
-            $currentMembership = Membership::where('id', $userHasValidMembership->membership_id)->first();
-            $memberships = Membership::where('isdeleted', 0)->where('id', '!=', $userHasValidMembership->membership_id)->get();
-            return view('user.membership.hasMembership', compact('memberships', 'currentMembership'));
-        } else {
-            $memberships = Membership::where('isdeleted', 0)->get();
-            return view('user.membership.membership', compact('memberships'));
+            $isActive = 1;
+        }else{
+            $isActive = 0;
         }
+
+            $memberships = Membership::where('isdeleted', 0)->get();
+            return view('user.membership.membership', compact('memberships','isActive'));
     }
 
     public function membershipPurchase($id, Request $request)
     {
-        $request->validate([
-            'image' => ['required', 'mimes:jpeg,jpg,png,gif']
-        ]);
-        $image = $request->image;
-        $image_name = date('Y-m-d') . '--' . (pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $image->getClientOriginalExtension();
-        $user = auth()->user()->id;
-        $membership = membership::find($id);
-        $membershipCreated = userHasMembership::create([
-            'user_id' => $user,
-            'membership_id' => $membership->id,
-            'endingDate' => Carbon::now()->addDays(30),
-            'status' => 'pending',
-            'qr' => $image_name,
-        ]);
+        $userHasValidMembership = userHasMembership::where('user_id', auth()->user()->id)->where('status', 'active')->first();
+        if ($userHasValidMembership) {
+            return redirect()->back()->with('error', 'Membership already active');
+        }
 
-        $image->storePubliclyAs('public/membership/', $user . '/' . $image_name);
-        return redirect()->back()->with('message', 'Membership Purchased Successfully');
-    }
+            $request->validate([
+                'image' => ['required', 'mimes:jpeg,jpg,png,gif']
+            ]);
+            $image = $request->image;
+            $image_name = date('Y-m-d') . '--' . (pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $image->getClientOriginalExtension();
+            $user = auth()->user()->id;
+            $membership = membership::find($id);
+            $membershipCreated = userHasMembership::create([
+                'user_id' => $user,
+                'membership_id' => $membership->id,
+                'endingDate' => Carbon::now()->addDays(30),
+                'status' => 'pending',
+                'qr' => $image_name,
+            ]);
+
+            $image->storePubliclyAs('public/membership/', $user . '/' . $image_name);
+            return redirect()->back()->with('message', 'Membership Purchased Successfully');
+        }
 
     public function bookPurchasePickup($id, Request $request)
     {
-
-        $request->validate([
-            'startingDate' => ['required'],
-            'endingDate' => ['required'],
-        ]);
-        $book = Book::find($id);
         $user = auth()->user()->id;
+        $validMembership = userHasMembership::where('user_id', $user)
+            ->where('status', 'Active')
+            ->First();
+        if ($validMembership) {
+            $request->validate([
+                'startingDate' => ['required'],
+                'endingDate' => ['required'],
+            ]);
+            $book = Book::find($id);
+            $user = auth()->user()->id;
 
-        Rentbook::create([
-            'user_id' => $user,
-            'book_id' => $book->id ,
-            'startingDate' => $request->startingDate,
-            'endingDate' => $request->endingDate,
-            'status' => 'Pending',
-        ]);
+            Rentbook::create([
+                'user_id' => $user,
+                'book_id' => $book->id,
+                'startingDate' => $request->startingDate,
+                'endingDate' => $request->endingDate,
+                'status' => 'Pending',
+            ]);
 
-        return redirect()->back()->with('message', 'book request has been placed');
-
+            return redirect()->back()->with('message', 'book request has been placed');
+        } else {
+            return redirect()->route('membership')->with('error', 'Please buy a membership First');
+        }
 
     }
+
     public function bookPurchaseDelivery($id, Request $request)
     {
-
-        $request->validate([
-            'startingDate' => ['required'],
-            'endingDate' => ['required'],
-            'address' => ['required']
-        ]);
-        $book = Book::find($id);
         $user = auth()->user()->id;
+        $validMembership = userHasMembership::where('user_id', $user)
+            ->where('status', 'Active')
+            ->First();
+        if ($validMembership) {
 
-        Rentbook::create([
-            'user_id' => $user,
-            'book_id' => $book->id,
-            'delivery' => $request->address,
-            'startingDate' => $request->startingDate,
-            'endingDate' => $request->endingDate,
-            'status' => 'Pending',
-        ]);
+            $request->validate([
+                'startingDate' => ['required'],
+                'endingDate' => ['required'],
+                'address' => ['required']
+            ]);
+            $book = Book::find($id);
+            $user = auth()->user()->id;
 
-        return redirect()->back()->with('message', 'book request has been placed');
+            Rentbook::create([
+                'user_id' => $user,
+                'book_id' => $book->id,
+                'delivery' => $request->address,
+                'startingDate' => $request->startingDate,
+                'endingDate' => $request->endingDate,
+                'status' => 'Pending',
+            ]);
 
+            return redirect()->back()->with('message', 'book request has been placed');
+        } else {
+            return redirect()->route('membership')->with('error', 'Please buy a membership First');
+        }
 
     }
 
@@ -107,13 +126,14 @@ class UserController extends Controller
         $currentBooks = Rentbook::where('user_id', auth()->user()->id)
             ->whereIn('status', ['Ongoing', 'Pending'])
             ->paginate(12);
-        return view('user.book.current',compact('currentBooks'));
+        return view('user.book.current', compact('currentBooks'));
     }
+
     public function bookOrderHistory()
     {
         $currentBooks = Rentbook::where('user_id', auth()->user()->id)
             ->where('status', 'Completed')
             ->paginate(12);
-        return view('user.book.history',compact('currentBooks'));
+        return view('user.book.history', compact('currentBooks'));
     }
 }
