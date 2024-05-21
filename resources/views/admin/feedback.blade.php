@@ -19,20 +19,37 @@
                 </tr>
             @else
                 @foreach($feedbacks as $feedback)
-                    <a href="{{route('feedback.single',['id' => $feedback->id])}}">
                     <tr>
-                        <td>{{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->iteration }}</td>
-                        <td>{{ $feedback->name}}</td>
-                        <td>{{ $feedback->email}}</td>
-                        <td>{{ $feedback->feedback}}</td>
+                        <td>
+                            <a href="{{ route('admin.feedback.single', ['id' => $feedback->id]) }}">
+                                {{ ($feedbacks->currentPage() - 1) * $feedbacks->perPage() + $loop->iteration }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.feedback.single', ['id' => $feedback->id]) }}">
+                                {{ $feedback->name }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.feedback.single', ['id' => $feedback->id]) }}">
+                                {{ $feedback->email }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.feedback.single', ['id' => $feedback->id]) }}">
+                                {{ $feedback->feedback }}
+                            </a>
+                        </td>
                         <td>
                             <div class="action_button_main">
-                                <a href="{{ route('admin.feedback.delete',['id' => $feedback->id]) }}"><i class="fa-solid fa-trash"></i></a>
+                                <a href="{{ route('admin.feedback.delete', ['id' => $feedback->id]) }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>
-                    </a>
                 @endforeach
+
             @endif
 
             </tbody>

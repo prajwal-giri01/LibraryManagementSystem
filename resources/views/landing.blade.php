@@ -106,7 +106,7 @@
     </section>
     <section class="container mt-4">
         <p class="h1">All Books </p>
-        <div class="d-flex  small_slider flex-wrap mt-3 justify-between">
+        <div class="d-flex  small_slider flex-wrap mt-3"  style="column-gap: 11px;">
             @foreach($books->slice(4) as $book)
                 <x-bookCard :book="$book" :addresses="$addresses"/>
             @endforeach

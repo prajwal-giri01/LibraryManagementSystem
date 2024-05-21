@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\DB;
 class BookController extends Controller
 {
 
-    public function rent()
+    public function rent(Request $request)
     {
-        $rentedBooks = Rentbook::with(['user', 'book'])->paginate(10);
+        $book = $request->rentedBook;
+        $rentedBooks = Rentbook::with(['user', 'book'])->search($book)->paginate(10);
         return view('admin.rentedBook.index', compact('rentedBooks'));
     }
 

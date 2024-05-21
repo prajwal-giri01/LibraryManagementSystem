@@ -36,4 +36,18 @@ class Rentbook extends Model
     {
         return $this->belongsTo(userDelivery::class,'delivery_id');
     }
+
+    public function scopeSearch($query, $book)
+    {
+        return $query->with('user', 'book')
+            ->where(function ($query) use ($book) {
+                $query->where('status', 'like', "%$book%");
+            })
+            ->orWhereHas('user', function ($query) use ($book) {
+                $query->where('name', 'like', "%$book%");
+            })
+            ->orWhereHas('book', function ($query) use ($book) {
+                $query->where('title', 'like', "%$book%");
+            });
+    }
 }

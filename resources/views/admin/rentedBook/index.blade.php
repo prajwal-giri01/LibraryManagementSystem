@@ -3,7 +3,7 @@
     <div class="ad_displayDetails col-10">
         <div class="d-flex detail_top">
             <div class=" col-10">
-                <form method="get" action={{route('admin.membership')}} class="form-inline d-flex" style="width: auto; height: 3rem;">
+                <form method="get" action={{route('admin.book.rent')}} class="form-inline d-flex" style="width: auto; height: 3rem;">
                 <input class="search mr-sm-2 text-black"  placeholder="Search...." aria-label="Search" name="rentedBook" autocomplete="off">
                 <button class="bg-main btn my-2 my-sm-0 search-button" type="submit">
                     <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;  font-size: 20px"></i>
@@ -24,8 +24,6 @@
                     <th>Books</th>
                     <th>From</th>
                     <th>To</th>
-                    <th>isDamaged</th>
-                    <th>isLate</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -43,8 +41,6 @@
                             <td>{{ $rentedBook->book->title}}</td>
                             <td>{{ date('Y-m-d', strtotime($rentedBook->startingDate)) }}</td>
                             <td>{{ date('Y-m-d', strtotime($rentedBook->endingDate)) }}</td>
-                            <td>{{ $rentedBook->isDamaged == 1 ? 'Yes' : 'No' }}</td>
-                            <td>{{ $rentedBook->isLate == 1 ? 'Yes' : 'No' }}</td>
                             <td>{{ $rentedBook->status}}</td>
                             <td>
                                 <div class="action_button_main">

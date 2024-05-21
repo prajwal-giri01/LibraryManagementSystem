@@ -88,9 +88,9 @@ class MembershipController extends Controller
 
     //user purchase membership
 
-    public function userMembership(){
-
-        $userhasMemberships  = UserHasMembership::with('user','membership')->orderBy('endingDate', 'desc')->paginate(10);
+    public function userMembership(Request $request){
+$userhasMembership = $request->userhasMembership;
+        $userhasMemberships  = UserHasMembership::with('user','membership')->search($userhasMembership)->orderBy('endingDate', 'desc')->paginate(10);
 
         return view('admin.userHasMembership.index',compact('userhasMemberships'));
     }

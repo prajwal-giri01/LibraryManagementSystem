@@ -118,7 +118,7 @@ class AuthorController extends Controller
 
     public function feedbackSingle($id){
        $feedback = Feedback::find($id);
-       return view('singleFeedback',compact('feedback'));
+       return view('admin.singleFeedback',compact('feedback'));
     }
     public function feedback()
     {

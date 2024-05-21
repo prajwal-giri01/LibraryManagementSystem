@@ -57,7 +57,7 @@ class UserController extends Controller
             ]);
 
             $image->storePubliclyAs('public/membership/', $user . '/' . $image_name);
-            return redirect()->back()->with('message', 'Membership Purchased Successfully');
+            return redirect()->back()->with('message', 'Membership Purchased Successfully for 1 month');
         }
 
     public function bookPurchasePickup($id, Request $request)

@@ -26,4 +26,17 @@ class userHasMembership extends Model
     public function membership(){
         return $this->belongsTo(membership::class, 'membership_id');
     }
+    public function scopeSearch($query, $userhasMembership)
+    {
+        return $query->with(['user', 'membership'])
+            ->where('status', 'like', "%$userhasMembership%")
+            ->orWhereHas('user', function ($query) use ($userhasMembership) {
+                $query->where('name', 'like', "%$userhasMembership%");
+            })
+            ->orWhereHas('membership', function ($query) use ($userhasMembership) {
+                $query->where('membershipLevel', 'like', "%$userhasMembership%");
+            });
+    }
+
+
 }

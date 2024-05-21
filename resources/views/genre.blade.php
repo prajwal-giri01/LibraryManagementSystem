@@ -73,7 +73,8 @@
 
     </header>
     <div class="container">
-        <div class="d-flex  small_slider flex-wrap mt-3">
+        <div class="d-flex  small_slider flex-wrap mt-3" style="    column-gap: 6px;
+">
             @foreach($books as $book)
                 <a href={{route('book',["id"=>$book->id])}}>
                     <x-bookCard :book="$book" :addresses="$addresses"/>

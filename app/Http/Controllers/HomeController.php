@@ -11,11 +11,13 @@ use App\Models\Feedback;
 use App\Models\Genre;
 use App\Models\membership;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function landing(){
+        dd(Carbon::now());
         $addresses = Delivery::where('isDeleted', 0)->get();
         $genres = Genre::where('isDeleted', 0)
             ->whereHas('books')

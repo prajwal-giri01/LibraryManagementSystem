@@ -4,7 +4,7 @@
     <a href="#" id="openModal{{$book->id}}">
         <a href={{route('book',["id"=>$book->id])}}>
             <img
-            src="{{ $book->image->image ? asset('storage/books/images/' . $book->id . '/' . $book->image->image) : asset('images/no-image.jpg') }}">
+                src="{{ $book->image->image ? asset('storage/books/images/' . $book->id . '/' . $book->image->image) : asset('images/no-image.jpg') }}">
         </a>
         <div class="book-details bg text-white">
             <div class="details">
@@ -30,28 +30,29 @@
                 <h5 class="modal-title fw-bolder" id="bookModalLabel{{$book->id}}">Confirm Your Purchase</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" id="checkoutOptionForm">
+            <form method="POST" id="checkoutOptionForm{{$book->id}}">
                 @csrf
                 @method('POST')
                 <div class="modal-body">
                     <p>Please choose an option for how you would like to receive the book.</p>
                     <div class="mt-4">
                         <div>
-                            <x-input-label for="startingDate" :value="__('Starting Date')" />
-                            <x-text-input id="startingDate" class="block mt-1 w-full text-black" type="date" name="startingDate"
-                                          :value="old('startingDate')" min="{{ \Carbon\Carbon::now()->toDateString() }}" required />
+                            <x-input-label for="startingDate{{$book->id}}" :value="__('Starting Date')" />
+                            <x-text-input id="startingDate{{$book->id}}" class="block mt-1 w-full text-black" type="date" name="startingDate"
+                                          :value="old('startingDate')" min="{{ \Carbon\Carbon::now()->toDateString() }}" max="{{ \Carbon\Carbon::now()->addMonth()->toDateString() }}" required />
                             <x-input-error :messages="$errors->get('startingDate')" class="mt-2"/>
                         </div>
                         <div class="mt-4">
-                            <x-input-label for="endingDate" :value="__('Ending Date')"/>
-                            <x-text-input id="endingDate" class="block mt-1 w-full text-black" type="date" name="endingDate"
-                                          :value="old('endingDate')" min="{{ \Carbon\Carbon::now()->toDateString() }}" required />
+                            <x-input-label for="endingDate{{$book->id}}" :value="__('Ending Date')"/>
+                            <x-text-input id="endingDate{{$book->id}}" class="block mt-1 w-full text-black" type="date" name="endingDate"
+                                          :value="old('endingDate')" min="{{ \Carbon\Carbon::now()->toDateString() }}" max="{{ \Carbon\Carbon::now()->addMonth()->toDateString() }}" required />
                             <x-input-error :messages="$errors->get('endingDate')" class="mt-2"/>
                         </div>
-                        <div id="deliveryFields" style="display: none;">
+
+                        <div id="deliveryFields{{$book->id}}" style="display: none;">
                             <div class="mt-4">
-                                <x-input-label for="address" :value="__('Address')" />
-                                <select id="address" class="block mt-1 w-full text-black" name="address">
+                                <x-input-label for="address{{$book->id}}" :value="__('Address')" />
+                                <select id="address{{$book->id}}" class="block mt-1 w-full text-black" name="address">
                                     <option selected disabled>Select your location</option>
                                     @foreach($addresses as $address)
                                         <option value="{{ $address->id }}" data-price="{{ $address->price }}">{{ $address->address }}</option>
@@ -60,8 +61,8 @@
                                 <x-input-error :messages="$errors->get('address')" class="mt-2"/>
                             </div>
                             <div class="mt-4">
-                                <x-input-label for="price" :value="__('Price')" />
-                                <x-text-input id="price" class="block mt-1 w-full text-black" type="text" name="price"
+                                <x-input-label for="price{{$book->id}}" :value="__('Price')" />
+                                <x-text-input id="price{{$book->id}}" class="block mt-1 w-full text-black" type="text" name="price"
                                               :value="old('price')" disabled />
                             </div>
 
@@ -69,15 +70,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="pickup" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button"
-                            style="background-color: #6c757d;" onclick="setAction('pickup')">
+                    <button type="button" id="pickup{{$book->id}}" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button"
+                            style="background-color: #6c757d;" onclick="setAction('pickup', {{$book->id}})">
                         Pick Up
                     </button>
-                    <button type="button" id="delivery" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button">
+                    <button type="button" id="delivery{{$book->id}}" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button">
                         Request Delivery
                     </button>
-                    <button type="button" id="deliveryAction" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button"
-                            style="display: none; background-color: #6c757d;" onclick="setAction('delivery')">
+                    <button type="button" id="deliveryAction{{$book->id}}" class="btn inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150 bg-main primary_button"
+                            style="display: none; background-color: #6c757d;" onclick="setAction('delivery', {{$book->id}})">
                         Request Delivery
                     </button>
                 </div>
@@ -87,90 +88,52 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        // Book ID and Modal handling
-        const bookId = @json($book->id);  // Assuming you're using Blade templating
+        const bookId = @json($book->id);
         const openButton = document.getElementById(`openButton${bookId}`);
         const modal = new bootstrap.Modal(document.getElementById(`bookModal${bookId}`));
 
         openButton.addEventListener('click', (e) => {
-            e.preventDefault();  // Prevent default behavior of the button inside the anchor tag
+            e.preventDefault();
             modal.show();
         });
 
-        // Set action for form submission
-        function setAction(actionType) {
-            const form = document.getElementById('checkoutOptionForm');
+        function setAction(actionType, bookId) {
+            const form = document.getElementById(`checkoutOptionForm${bookId}`);
             if (actionType === 'pickup') {
-                form.action = "{{route('book.purchase.pickup', ['id' => $book->id])}}";
+                form.action = "{{route('book.purchase.pickup', ['id' => $book->id])}}".replace('{{$book->id}}', bookId);
             } else if (actionType === 'delivery') {
-                form.action = "{{route('book.purchase.delivery', ['id' => $book->id])}}";
+                form.action = "{{route('book.purchase.delivery', ['id' => $book->id])}}".replace('{{$book->id}}', bookId);
             }
             form.submit();
         }
 
-        // Delivery and Pickup button handling
-        const deliveryButton = document.getElementById('delivery');
-        const deliveryActionButton = document.getElementById('deliveryAction');
-        const pickupButton = document.getElementById('pickup');
-        const deliveryFields = document.getElementById('deliveryFields');
+        const deliveryButton = document.getElementById(`delivery${bookId}`);
+        const deliveryActionButton = document.getElementById(`deliveryAction${bookId}`);
+        const pickupButton = document.getElementById(`pickup${bookId}`);
+        const deliveryFields = document.getElementById(`deliveryFields${bookId}`);
 
         deliveryButton.addEventListener('click', function () {
-            // Hide the Pick Up button
             pickupButton.style.display = 'none';
             deliveryButton.style.display = 'none';
-
-            // Show the Delivery Action button
             deliveryActionButton.style.display = 'inline-flex';
-
-            // Show the delivery fields
             deliveryFields.style.display = 'block';
-
         });
 
         deliveryActionButton.addEventListener('click', function () {
-            // Set action for delivery
-            setAction('delivery');
+            setAction('delivery', bookId);
         });
 
         pickupButton.addEventListener('click', function () {
-            // Set action for pickup
-            setAction('pickup');
-        });
-    });
-
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const startingDateInput = document.getElementById('startingDate');
-        const endingDateInput = document.getElementById('endingDate');
-
-        startingDateInput.addEventListener('change', function () {
-            const selectedStartDate = this.value;
-            endingDateInput.min = selectedStartDate;
+            setAction('pickup', bookId);
         });
 
-        // Set initial min value for endingDate based on old input values, if any
-        if (startingDateInput.value) {
-            endingDateInput.min = startingDateInput.value;
-        }
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const addressSelect = document.getElementById('address');
-        const priceInput = document.getElementById('price');
+        document.getElementById(`startingDate${bookId}`).addEventListener('change', function () {
+            document.getElementById(`endingDate${bookId}`).min = this.value;
+        });
 
-        addressSelect.addEventListener('change', function () {
+        document.getElementById(`address${bookId}`).addEventListener('change', function () {
             const selectedOption = this.options[this.selectedIndex];
-            const price = selectedOption.getAttribute('data-price');
-            priceInput.value = price;
+            document.getElementById(`price${bookId}`).value = selectedOption.getAttribute('data-price');
         });
-
-        // Set initial price value if an address is already selected (e.g., after form repopulation)
-        if (addressSelect.value) {
-            const selectedOption = addressSelect.options[addressSelect.selectedIndex];
-            const price = selectedOption.getAttribute('data-price');
-            priceInput.value = price;
-        }
     });
 </script>
